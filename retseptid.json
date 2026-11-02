@@ -1,0 +1,67 @@
+[
+    {
+        "nimi": "Omlett",
+        "koostisosad": ["muna", "piim", "juust", "sool"],
+        "juhend": [
+            "Klopi munad piimaga lahti.",
+            "Lisa riivitud juust.",
+            "Kuumuta pann.",
+            "Prae omlett valmis."
+        ]
+    },
+    {
+        "nimi": "Pannkoogid",
+        "koostisosad": ["muna", "piim", "jahu", "suhkur", "sool"],
+        "juhend": [
+            "Sega munad piimaga.",
+            "Lisa jahu, suhkur ja sool.",
+            "Sega tainas ühtlaseks.",
+            "Prae pannkoogid."
+        ]
+    },
+    {
+        "nimi": "Praekartulid",
+        "koostisosad": ["kartul", "sibul", "õli", "sool", "pipar"],
+        "juhend": [
+            "Koori kartulid ja lõika viiludeks.",
+            "Haki sibul väikesteks tükkideks.",
+            "Kuumuta pannil õli.",
+            "Prae kartulid ja sibul pehmeks ning maitsesta."
+        ]
+    },
+    {
+        "nimi": "Makaronid hakklihaga",
+        "koostisosad": ["makaronid", "hakkliha", "sibul", "õli", "sool", "pipar"],
+        "juhend": [
+            "Keeda makaronid soolaga maitsestatud vees pehmeks.",
+            "Koori ja haki sibul.",
+            "Kuumuta pannil õli ning prae sibul klaasjaks.",
+            "Lisa hakkliha ja prae täieliku küpsemiseni.",
+            "Maitsesta soola ja pipraga.",
+            "Sega keedetud makaronid hakklihaga."
+        ]
+    },
+    {
+        "nimi": "Kana riisiga",
+        "koostisosad": ["kanafilee", "riis", "sibul", "porgand", "õli", "sool", "pipar"],
+        "juhend": [
+            "Keeda riis vastavalt pakendil olevale juhendile.",
+            "Lõika kanafilee väikesteks tükkideks.",
+            "Koori ja haki sibul ning porgand.",
+            "Kuumuta pannil õli ja prae kanafilee täieliku küpsemiseni.",
+            "Lisa sibul ja porgand ning prae pehmeks.",
+            "Maitsesta soola ja pipraga.",
+            "Sega kana ja köögiviljad keedetud riisiga."
+        ]
+    }
+    {
+        "nimi": "Praemuna",
+        "koostisosad": ["muna", "õli", "sool", "pipar"],
+        "juhend": [
+            "Kuumuta pannil veidi õli.",
+            "Löö munad ettevaatlikult pannile.",
+            "Prae keskmisel kuumusel, kuni munavalge on hüübinud.",
+            "Maitsesta soola ja pipraga."
+        ]
+    }
+]
