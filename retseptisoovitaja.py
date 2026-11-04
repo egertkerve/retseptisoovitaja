@@ -11,7 +11,7 @@ retseptid = loe_retseptid("retseptid.json")
 toiduained = []
 
 while True:
-    toiduaine = input('Sisesta toiduaine: ').strip().lower()
+    toiduaine = input('Sisesta toiduained ükshaaval: ').strip().lower()
     if toiduaine == '':
         break
     else:
@@ -20,4 +20,12 @@ while True:
 print(f'Sinu toiduained: {toiduained}')
 
 
+for retsept in retseptid:
+    koostisosad1 = retsept.get('koostisosad')
+    sobivad = 0
+    for toiduaine in toiduained:
+        if toiduaine in koostisosad1:
+            sobivad += 1
 
+    sobviusprotsent = round(sobivad / len(koostisosad1) * 100, 1)
+    print(f'{retsept["nimi"]} sobib {sobviusprotsent}%')
