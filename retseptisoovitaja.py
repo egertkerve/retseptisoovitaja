@@ -1,8 +1,15 @@
 """
-PROJEKT: Nutikas Külmkapiraamat / Retseptiotsija
+PROJEKT: Nutikas Külmkapiraamat / Retseptisoovitaja
 AUTORID: Martin Saar ja Egert Kerve
-ALLIKAD: Algne loogika autorite loodud, täiendatud tehisaru abiga lehekülgede kuvamiseks
-KIRJELDUS: Programm otsib koostisosade põhjal sobivaid retsepte ja kuvab neid pingerivis.
+KIRJELDUS: Programm otsib kasutaja sisestatud koostisosade põhjal sobivaid
+retsepte ja kuvab neid sobivusprotsendi järgi pingerivis. Vesi, sool ja pipar
+loetakse alati olemasolevaks.
+
+KÄIVITAMINE:
+1. Pane fail retseptid.json samasse kausta selle failiga.
+2. Käivita programm käsuga: python failinimi.py
+3. Sisesta oma toiduained ainsuse nimetavas käändes ükshaaval (nt "tatar", "või"). Tühi rida lõpetab sisestuse.
+4. Vali nimekirjast retsepti number, kirjuta "järgmine" või "lõpeta".
 """
 
 import json
@@ -25,7 +32,7 @@ def toiduainete_sisestamine():
     toiduained = []
 
     while True:
-        toiduaine = input('Sisesta toiduained ükshaaval: ').strip().lower()
+        toiduaine = input('Sisesta toiduained ainsuses ükshaaval: ').strip().lower()
         if toiduaine == '':
             break
         else:
@@ -37,20 +44,24 @@ def toiduainete_sisestamine():
 def sobivad_retseptid(retseptid, toiduained):
      
     """Leiab sobivad retseptid ja järjestab need sobivusprotsendi järgi."""
+
+    alati_olemas = {'vesi', 'sool', 'pipar'}
     
     sobilikud_retseptid = []
     for retsept in retseptid:
-        koostisosad1 = retsept.get('koostisosad')
+        koostisosad = retsept.get('koostisosad')
         sobivad = 0
-        for koostisosa_rida in koostisosad1:
+        kasutaja_sobivad = 0
+        for koostisosa_rida in koostisosad:
             koostisosa = koostisosa_rida.split('–')[0].strip().lower()
-            for toiduaine in toiduained:
-                if toiduaine == koostisosa:
-                    sobivad += 1
-                    break 
+            if koostisosa in toiduained:
+                sobivad += 1
+                kasutaja_sobivad += 1
+            elif koostisosa in alati_olemas:
+                sobivad += 1
     
-        sobivusprotsent = round(sobivad / len(koostisosad1) * 100, 1)
-        if sobivad > 0:
+        sobivusprotsent = round(sobivad / len(koostisosad) * 100, 1)
+        if kasutaja_sobivad > 0:
             sobilikud_retseptid.append({
                 'retsept': retsept,
                 'protsent': sobivusprotsent
@@ -100,13 +111,13 @@ def main():
         
         praegune_valik = {}
         for i in range(kuvatud_indeks, min(kuvatud_indeks + vastete_arv, len(sobilikud_retseptid))):
-            järjekorranumber = i + 1
+            jarjekorranumber = i + 1
             üksus = sobilikud_retseptid[i]
             nimi = üksus['retsept']['nimi']
             protsent = üksus['protsent']
             
-            print(f"[{järjekorranumber}] {nimi} — sobivus: {protsent}%")
-            praegune_valik[järjekorranumber] = üksus['retsept']
+            print(f"[{jarjekorranumber}] {nimi} — sobivus: {protsent}%")
+            praegune_valik[jarjekorranumber] = üksus['retsept']
 
         valik = input("\nSisesta retsepti NUMBER, 'järgmine' uute kuvamiseks või 'lõpeta': ").strip().lower()
 
@@ -114,7 +125,6 @@ def main():
             kuvatud_indeks += vastete_arv
             continue
         elif valik == 'lõpeta':
-            print("Head kokkamist!")
             break
         
         try:
@@ -124,6 +134,7 @@ def main():
                 kuva_retsept(valitud_retsept)
                 uuesti = input("Kas soovid vaadata teisi retsepte? (jah/ei): ").strip().lower()
                 if uuesti != 'jah':
+                    print("Head kokkamist!")
                     break
             else:
                 print("Seda numbrit pole praeguses valikus. Proovi uuesti.")
